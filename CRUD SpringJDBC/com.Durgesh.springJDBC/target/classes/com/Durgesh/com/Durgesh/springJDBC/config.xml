@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.Springframework.org/schema/context"
+       xmlns:p="http://www.Springframework.org/schema/p"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.Springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+           
+           <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" name="ds">
+           <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+           <property name="url" value="jdbc:mysql://localhost:3306/springjdbc"/>
+           <property name="username" value="root"/>
+           <property name="password" value="Parikshit@1"/>
+           </bean>
+           
+           <!-- go inside the app.java file press control+shift+t open the interface search jdbcTemplate then
+                we can see the class jdbcTemplate and simply copy the package name and paste here again go there
+                and copy the name of the class and paste. -->
+           <bean class="org.springframework.jdbc.core.JdbcTemplate" name="jdbcTemplate">
+           <property name="dataSource">
+           <!-- here we are injecting the object of the dataSource class so for  that we neeed to create the object of the class
+                so for that see the 13 line there we are created the object of the dataSource class and use all the propertuy of the 
+                dataSource class and inside the ref bean we are injecting ds that is the object of the dataSource class -->
+           <ref bean="ds"/>
+           </property>
+           </bean>
+            <!--  with the help of p:schemas
+            <bean class="org.springframework.jdbc.core.JdbcTemplate" name="jdbcTemplate" p:dataSource-ref="ds"/>
+            -->
+            <bean class="com.Durgesh.com.Durgesh.springJDBC.dao.StudentDaoImpl" name="studentDao1">
+            <property name="jdbcTemplatenew" ref="jdbcTemplate"/>
+            </bean>
+
+   </beans>
